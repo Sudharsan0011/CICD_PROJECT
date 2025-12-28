@@ -57,11 +57,13 @@ pipeline {
             agent { label 'docker' }
             steps {
                 sh '''
-                 cd /home/jenkins/docker
+				 cd /home/jenkins/docker
+                 sudo kubectl delete deployment tomcat --ignore-not-found=true
+                 sudo kubectl delete pods --all --force --grace-period=0
                  sudo kubectl apply -f deployment.yml
-                 sudo kubectl set image deployment/tomcat mindtree=${IMAGE_REPO}:${IMAGE_TAG} --record
+                 sudo kubectl set image deployment/tomcat mindtreerepo="${IMAGE_REPO}:${IMAGE_TAG}" --record
                  sudo kubectl apply -f svc.yml
-                 '''
+                '''
             }
         }
  
