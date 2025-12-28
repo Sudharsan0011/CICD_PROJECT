@@ -63,7 +63,7 @@ pipeline {
                  sudo kubectl apply -f deployment.yml
                  sudo kubectl set image deployment/tomcat mindtreerepo="${IMAGE_REPO}:${IMAGE_TAG}" --record
                  sudo kubectl apply -f svc.yml
-                '''
+              '''
             }
         }
  
